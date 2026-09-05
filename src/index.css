@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+:root {
+  --snow-white: #FCFCFB;
+  --pure-white: #FFFFFF;
+  --oceanic-green: #008C95;
+  --oceanic-green-dark: #006B73;
+  --oceanic-green-light: #DFF4F3;
+  --deep-black: #090D10;
+  --soft-black: #182026;
+  --border-light: #DDE7E7;
+
+  --font-heading: "Libre Baskerville", "Century Schoolbook", Georgia, serif;
+  --font-body: "Inter", Arial, sans-serif;
+}
+
+@theme {
+  --font-sans: "Inter", Arial, sans-serif;
+  --font-heading: "Libre Baskerville", "Century Schoolbook", Georgia, serif;
+
+  --color-[#008C95]: #008C95;
+  --color-[#006B73]: #006B73;
+  --color-[#DFF4F3]: #DFF4F3;
+  --color-[#FCFCFB]: #FCFCFB;
+  --color-[#090D10]: #090D10;
+  --color-[#182026]: #182026;
+  --color-[#DDE7E7]: #DDE7E7;
+}
+
+@layer base {
+  html {
+    font-family: "Inter", Arial, sans-serif;
+    scroll-behavior: smooth;
+    background-color: var(--snow-white);
+    color: var(--soft-black);
+  }
+  body {
+    font-family: "Inter", Arial, sans-serif;
+    background-color: var(--snow-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Libre Baskerville", "Century Schoolbook", Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+  button, nav, input, select, textarea {
+    font-family: "Inter", Arial, sans-serif;
+  }
+}
+
+.font-heading {
+  font-family: "Libre Baskerville", "Century Schoolbook", Georgia, serif;
+}
+.font-body {
+  font-family: "Inter", Arial, sans-serif;
+}
+
+/* Custom TellerBud color utility shortcuts */
+.bg-snow-white { background-color: #FCFCFB; }
+.bg-pure-white { background-color: #FFFFFF; }
+.bg-oceanic-green { background-color: #008C95; }
+.bg-oceanic-green-dark { background-color: #006B73; }
+.bg-oceanic-green-light { background-color: #DFF4F3; }
+.bg-deep-black { background-color: #090D10; }
+
+.text-oceanic-green { color: #008C95; }
+.text-oceanic-green-dark { color: #006B73; }
+.text-deep-black { color: #090D10; }
+.text-soft-black { color: #182026; }
+
+.border-oceanic-green { border-color: #008C95; }
+.border-oceanic-light { border-color: #DFF4F3; }
+.border-brand-light { border-color: #DDE7E7; }
+
+/* Subtle custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FCFCFB;
+}
+::-webkit-scrollbar-thumb {
+  background: #DDE7E7;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #008C95;
+}
+
+/* Premium Developer Credit Glow & Pulse Effect */
+.asco-glow-text {
+  color: #008C95;
+  text-shadow:
+    0 0 4px rgba(0, 140, 149, 0.75),
+    0 0 10px rgba(0, 140, 149, 0.45),
+    0 0 18px rgba(0, 140, 149, 0.20);
+  animation: ascoGlowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes ascoGlowPulse {
+  0% {
+    text-shadow:
+      0 0 4px rgba(0, 140, 149, 0.65),
+      0 0 8px rgba(0, 140, 149, 0.35),
+      0 0 14px rgba(0, 140, 149, 0.15);
+  }
+  100% {
+    text-shadow:
+      0 0 6px rgba(0, 140, 149, 0.85),
+      0 0 14px rgba(0, 140, 149, 0.55),
+      0 0 22px rgba(0, 140, 149, 0.30);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asco-glow-text {
+    animation: none;
+  }
+}
+
