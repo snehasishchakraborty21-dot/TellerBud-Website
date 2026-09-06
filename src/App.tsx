@@ -14,14 +14,13 @@ import ServicesPage from './pages/ServicesPage';
 import ForBusinessOwnersPage from './pages/ForBusinessOwnersPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import { CUSTOMER_APP_DOWNLOAD_URL } from './config/site';
 
 export default function App() {
   const [activePage, setActivePage] = useState<PageId>('home');
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleGetTellerBud = () => {
-    window.open(CUSTOMER_APP_DOWNLOAD_URL, '_blank', 'noopener,noreferrer');
+    setModalOpen(true);
   };
 
   const handleNavigate = (page: PageId) => {
@@ -94,6 +93,7 @@ export default function App() {
       <GetStartedModal
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
+        onNavigate={handleNavigate}
       />
     </div>
   );

@@ -9,7 +9,6 @@ import {
   Clock,
   UserCheck,
 } from 'lucide-react';
-import { CUSTOMER_APP_DOWNLOAD_URL } from '../config/site';
 import { PageId } from '../types';
 
 interface HowItWorksPageProps {
@@ -29,7 +28,7 @@ const STEP_4_IMG = 'https://images.unsplash.com/photo-1531482615713-2afd69097998
 const PICKUP_MODE_IMG = 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=80';
 const DELIVERY_MODE_IMG = 'https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&q=80';
 
-export default function HowItWorksPage({ onNavigate }: HowItWorksPageProps) {
+export default function HowItWorksPage({ onGetTellerBud, onNavigate }: HowItWorksPageProps) {
   const [heroImg, setHeroImg] = useState(HERO_BG_IMG);
   const [step1Img, setStep1Img] = useState(STEP_1_IMG);
   const [step2Img, setStep2Img] = useState(STEP_2_IMG);
@@ -57,7 +56,7 @@ export default function HowItWorksPage({ onNavigate }: HowItWorksPageProps) {
 
         {/* Hero Content Layer */}
         <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 py-16 sm:py-24">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl lg:max-w-[840px]">
             {/* Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E5F5F5]/20 backdrop-blur-xs border border-[#E5F5F5]/30 mb-6">
               <span className="w-2 h-2 rounded-full bg-[#008C95]" />
@@ -72,21 +71,20 @@ export default function HowItWorksPage({ onNavigate }: HowItWorksPageProps) {
             </h1>
 
             {/* Supporting text */}
-            <p className="text-base sm:text-lg lg:text-xl text-[#FCFCFB]/90 font-normal leading-relaxed mb-8 max-w-2xl">
-              TellerBud connects Customer requests with eligible Agents for convenient Pickup or Delivery support.
+            <p className="text-base sm:text-lg lg:text-xl text-[#FCFCFB] font-normal leading-relaxed mb-8 max-w-[800px]">
+              TellerBud connects Customers with trusted Agents for convenient and secure Pickup and Delivery, while capturing everyday walk-in and requested transactions in real time and giving Business Owners clear, up-to-date visibility of their Agents and operations.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <a
-                href={CUSTOMER_APP_DOWNLOAD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={onGetTellerBud}
                 className="px-8 py-4 bg-[#008C95] hover:bg-[#005F67] active:bg-[#00484E] text-[#FCFCFB] text-base font-semibold rounded-full transition-all shadow-md shadow-[#008C95]/30 flex items-center justify-center gap-2.5 cursor-pointer active:scale-[0.99]"
               >
                 <span>Get TellerBud</span>
                 <ArrowRight className="w-5 h-5" />
-              </a>
+              </button>
 
               {onNavigate && (
                 <button
@@ -387,15 +385,14 @@ export default function HowItWorksPage({ onNavigate }: HowItWorksPageProps) {
           <p className="text-base sm:text-lg text-[#E5F5F5]/90 leading-relaxed mb-8 max-w-xl mx-auto font-normal">
             A transaction is completed only after both the Customer and Agent have confirmed it.
           </p>
-          <a
-            href={CUSTOMER_APP_DOWNLOAD_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={onGetTellerBud}
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#FCFCFB] text-[#005F67] hover:bg-[#E5F5F5] active:bg-[#D9E4E4] text-base font-semibold rounded-full transition-all shadow-md cursor-pointer"
           >
             <span>Get TellerBud</span>
             <ArrowRight className="w-5 h-5" />
-          </a>
+          </button>
         </div>
       </section>
     </div>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TELLERBUD_LOGO_URL } from '../config/site';
 
 interface TellerBudLogoProps {
   className?: string;
@@ -8,57 +9,66 @@ interface TellerBudLogoProps {
 export default function TellerBudLogo({ className = '', size = 'md' }: TellerBudLogoProps) {
   const [imgError, setImgError] = useState(false);
 
-  const dimensionClasses = {
-    sm: 'h-[38px] sm:h-[44px] w-auto',
-    md: 'h-[50px] sm:h-[60px] lg:h-[74px] w-auto',
-    lg: 'h-[52px] sm:h-[60px] lg:h-[64px] w-auto',
+  // Logo Icon Height Requirements:
+  // Header (md): approximately 68–76 px high (lg:h-[72px])
+  // Footer (lg): approximately 58–64 px high (lg:h-[62px], sm:h-[54px], h-[46px])
+  const iconDimensionClasses = {
+    sm: 'h-[44px] sm:h-[48px] w-auto',
+    md: 'h-[50px] sm:h-[62px] lg:h-[72px] w-auto',
+    lg: 'h-[46px] sm:h-[54px] lg:h-[62px] w-auto',
   }[size];
 
-  const badgeSizeClasses = {
-    sm: 'w-[38px] h-[38px] sm:w-[44px] sm:h-[44px] text-lg',
-    md: 'w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] lg:w-[74px] lg:h-[74px] text-2xl sm:text-3xl lg:text-4xl',
-    lg: 'w-[52px] h-[52px] sm:w-[60px] sm:h-[60px] lg:w-[64px] lg:h-[64px] text-2xl sm:text-3xl lg:text-4xl',
-  }[size];
-
+  // Brand Text Size Requirements:
+  // Header (md): approximately 32–36 px (lg:text-[34px])
+  // Footer (lg): approximately 30–34 px (lg:text-[32px], sm:text-[27px], text-[24px])
   const titleSizeClasses = {
-    sm: 'text-base sm:text-lg',
+    sm: 'text-[18px] sm:text-[20px]',
     md: 'text-[24px] sm:text-[28px] lg:text-[34px]',
-    lg: 'text-[25px] sm:text-[28px] lg:text-[31px]',
+    lg: 'text-[24px] sm:text-[27px] lg:text-[32px]',
   }[size];
 
-  const taglineSizeClasses = {
-    sm: 'text-[8.5px] sm:text-[9.5px]',
-    md: 'text-[9.5px] sm:text-[10.5px] lg:text-[11.5px]',
-    lg: 'text-[10px] sm:text-[11px] lg:text-[11.5px]',
+  // Spacing between logo icon and brand text: 12–16 px gap
+  const gapClasses = {
+    sm: 'gap-3',
+    md: 'gap-3.5 sm:gap-4 lg:gap-4',
+    lg: 'gap-3 sm:gap-3.5 lg:gap-4',
+  }[size];
+
+  const fallbackSizeClasses = {
+    sm: 'w-[44px] h-[44px] text-sm',
+    md: 'w-[50px] h-[50px] sm:w-[62px] sm:h-[62px] lg:w-[72px] lg:h-[72px] text-xl sm:text-2xl lg:text-3xl',
+    lg: 'w-[46px] h-[46px] sm:w-[54px] sm:h-[54px] lg:w-[62px] lg:h-[62px] text-xl sm:text-2xl lg:text-2xl',
   }[size];
 
   return (
-    <div className={`flex items-center gap-3.5 sm:gap-4 lg:gap-4.5 ${className}`}>
+    <div className={`inline-flex items-center ${gapClasses} shrink-0 ${className}`}>
+      {/* Official TellerBud Logo Icon */}
       {!imgError ? (
         <img
-          src="/assets/tellerbud-logo.png"
-          alt="TellerBud Logo"
-          className={`${dimensionClasses} object-contain shrink-0`}
+          src={TELLERBUD_LOGO_URL}
+          alt="TellerBud Icon"
+          className={`${iconDimensionClasses} object-contain shrink-0`}
           style={{ imageRendering: 'auto' }}
           onError={() => setImgError(true)}
         />
       ) : (
-        /* Prominent official branding badge fallback when logo image is not present */
-        <div className={`${badgeSizeClasses} bg-[#008C95] rounded-2xl flex items-center justify-center text-white font-extrabold shadow-sm shrink-0 border border-[#008C95]/20`}>
-          <span className="font-sans tracking-tight">TB</span>
+        /* Fallback badge when logo image is not present */
+        <div
+          className={`${fallbackSizeClasses} bg-[#008C95] text-[#FCFCFB] font-bold rounded-2xl flex items-center justify-center tracking-tight shadow-xs shrink-0`}
+        >
+          TB
         </div>
       )}
 
-      {/* Official TellerBud Brand Name & Tagline */}
-      <div className="flex flex-col justify-center leading-none shrink-0">
-        <span className={`${titleSizeClasses} font-extrabold tracking-tight text-[#090D10] group-hover:text-[#008C95] transition-colors`}>
-          TellerBud
-        </span>
-        <span className={`${taglineSizeClasses} font-extrabold tracking-widest text-[#008C95] uppercase mt-1`}>
-          MOBILE MONEY CONVENIENCE
-        </span>
-      </div>
+      {/* Official TellerBud Brand Name (Bold, Deep Black, Vertically Centred, No Tagline) */}
+      <span
+        className={`font-heading font-bold text-[#090D10] ${titleSizeClasses} tracking-tight leading-none shrink-0 group-hover:text-[#008C95] transition-colors`}
+      >
+        TellerBud
+      </span>
     </div>
   );
 }
+
+
 

@@ -1,7 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { Mail, MapPin, Send, ArrowRight, Building2, Info, CheckCircle2 } from 'lucide-react';
 import { PageId } from '../types';
-import { SITE_CONFIG, CUSTOMER_APP_DOWNLOAD_URL } from '../config/site';
+import { SITE_CONFIG } from '../config/site';
 
 interface ContactPageProps {
   onGetTellerBud?: () => void;
@@ -12,7 +12,7 @@ interface ContactPageProps {
 const CONTACT_HERO_IMG = '/assets/contact-hero.jpg';
 const FALLBACK_HERO = 'https://images.unsplash.com/photo-1534536281715-e28d76689b4d?auto=format&fit=crop&w=1920&q=85';
 
-export default function ContactPage({ onNavigate }: ContactPageProps) {
+export default function ContactPage({ onNavigate, onGetTellerBud }: ContactPageProps) {
   const [heroImgError, setHeroImgError] = useState(false);
   
   // Form State
@@ -322,15 +322,14 @@ export default function ContactPage({ onNavigate }: ContactPageProps) {
               Access the Customer Mobile App to request convenient Pickup or Delivery support.
             </p>
             <div className="pt-4 flex items-center justify-center">
-              <a
-                href={CUSTOMER_APP_DOWNLOAD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={onGetTellerBud}
                 className="px-8 py-4 bg-[#FCFCFB] hover:bg-[#E5F5F5] text-[#005F67] font-bold text-base rounded-full transition-all shadow-lg hover:shadow-xl inline-flex items-center gap-2 cursor-pointer"
               >
                 <span>Get TellerBud</span>
                 <ArrowRight className="w-5 h-5" />
-              </a>
+              </button>
             </div>
           </div>
         </div>

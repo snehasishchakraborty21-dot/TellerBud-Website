@@ -2,42 +2,27 @@ import { useState } from 'react';
 import {
   ArrowRight,
   ChevronRight,
-  MapPin,
-  Truck,
-  Building2,
   ShieldCheck,
   UserCheck,
   Clock,
   Globe2,
-  CheckCircle2,
   Smartphone,
   Monitor,
+  CheckCircle2,
 } from 'lucide-react';
 import { PageId } from '../types';
-import { CUSTOMER_APP_DOWNLOAD_URL } from '../config/site';
 
 interface HomePageProps {
   onGetTellerBud: () => void;
   onNavigate: (page: PageId) => void;
 }
 
-// Hero & Core Services local image asset paths
+// Hero local image asset path & fallback
 const HERO_BG_IMG = '/assets/home-hero.jpg';
-const PICKUP_IMG = '/assets/home-pickup.jpg';
-const DELIVERY_IMG = '/assets/home-delivery.jpg';
-const BUSINESS_IMG = '/assets/home-business.jpg';
-
-// Safe high-resolution online fallbacks
 const FALLBACK_HERO = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=1920&q=85';
-const FALLBACK_PICKUP = 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=85';
-const FALLBACK_DELIVERY = 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=85';
-const FALLBACK_BUSINESS = 'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?auto=format&fit=crop&w=1200&q=85';
 
 export default function HomePage({ onGetTellerBud, onNavigate }: HomePageProps) {
   const [heroError, setHeroError] = useState(false);
-  const [pickupError, setPickupError] = useState(false);
-  const [deliveryError, setDeliveryError] = useState(false);
-  const [businessError, setBusinessError] = useState(false);
 
   return (
     <div className="w-full bg-[#FCFCFB] text-[#182026]">
@@ -45,7 +30,7 @@ export default function HomePage({ onGetTellerBud, onNavigate }: HomePageProps) 
       {/* ================================================== */}
       {/* 1. FULL-WIDTH HERO (650–720px high)                 */}
       {/* ================================================== */}
-      <section className="relative w-full h-[650px] sm:h-[680px] lg:h-[720px] bg-[#050F11] overflow-hidden flex items-center">
+      <section className="relative w-full min-h-[620px] sm:min-h-[660px] lg:min-h-[700px] h-auto lg:h-[700px] bg-[#050F11] overflow-hidden flex items-start">
         {/* Full-width authentic African commerce photograph background */}
         <div className="absolute inset-0 w-full h-full bg-[#005F67]/30">
           {!heroError ? (
@@ -69,40 +54,44 @@ export default function HomePage({ onGetTellerBud, onNavigate }: HomePageProps) 
           <div className="absolute inset-0 bg-gradient-to-r from-[#050F11]/70 via-[#050F11]/55 to-transparent" />
         </div>
 
-        {/* Hero Content Container */}
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 py-12">
-          <div className="max-w-2xl text-left">
-            
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E5F5F5]/15 border border-[#008C95]/40 mb-6 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-[#008C95]" />
-              <span className="text-xs font-semibold tracking-wider text-[#E5F5F5] uppercase">
-                MOBILE MONEY CONVENIENCE
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[62px] font-bold text-[#FCFCFB] tracking-tight leading-[1.12] mb-6">
-              Mobile money convenience,{' '}
+        {/* Hero Content Container — Top-aligned (70–90 px below header on desktop) */}
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20 pt-16 sm:pt-20 lg:pt-[82px] pb-24 sm:pb-28 lg:pb-32">
+          {/* Headline Container: ~760–900 px wide on desktop */}
+          <div className="w-full max-w-[920px] text-left">
+            {/* Headline: single line on desktop (lg:whitespace-nowrap), clamp(48px, 4.8vw, 72px) */}
+            <h1
+              className="font-heading font-bold text-[#FCFCFB] tracking-tight leading-[1.12] mb-6 sm:mb-6.5 text-3xl sm:text-5xl lg:[font-size:clamp(48px,4.8vw,72px)] whitespace-normal lg:whitespace-nowrap"
+            >
+              <span>Mobile money </span>
               <span className="text-[#008C95]">closer to you.</span>
             </h1>
 
-            {/* Supporting Copy */}
-            <p className="text-lg sm:text-xl text-[#FCFCFB]/90 font-normal leading-relaxed mb-8 max-w-xl">
-              TellerBud helps Customers access secure Pickup and Delivery support through confirmed Agents.
-            </p>
+            {/* Supporting Bullet List — 22–28 px below headline, 26–32 px above CTA buttons */}
+            <ul className="space-y-3 sm:space-y-3.5 mb-7 sm:mb-8 max-w-2xl lg:max-w-3xl">
+              <li className="flex items-start gap-3 text-[15px] sm:text-base lg:text-[17px] text-[#FCFCFB] leading-relaxed">
+                <CheckCircle2 className="w-5 h-5 text-[#008C95] shrink-0 mt-0.5" />
+                <span>TellerBud connects Customers to trusted Agents for secure cash pickup and delivery.</span>
+              </li>
+              <li className="flex items-start gap-3 text-[15px] sm:text-base lg:text-[17px] text-[#FCFCFB] leading-relaxed">
+                <CheckCircle2 className="w-5 h-5 text-[#008C95] shrink-0 mt-0.5" />
+                <span>TellerBud helps Agents with liquidity.</span>
+              </li>
+              <li className="flex items-start gap-3 text-[15px] sm:text-base lg:text-[17px] text-[#FCFCFB] leading-relaxed">
+                <CheckCircle2 className="w-5 h-5 text-[#008C95] shrink-0 mt-0.5" />
+                <span>TellerBud helps Business Owners with visibility across their operations.</span>
+              </li>
+            </ul>
 
-            {/* Action Buttons */}
+            {/* Action Buttons — 28–32 px below paragraph */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <a
-                href={CUSTOMER_APP_DOWNLOAD_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                onClick={onGetTellerBud}
                 className="px-8 py-4 bg-[#008C95] hover:bg-[#005F67] active:bg-[#00484E] text-[#FCFCFB] text-base font-semibold rounded-full transition-all shadow-md shadow-[#008C95]/30 cursor-pointer flex items-center justify-center gap-2.5 active:scale-[0.99]"
               >
                 <span>Get TellerBud</span>
                 <ArrowRight className="w-5 h-5" />
-              </a>
+              </button>
 
               <button
                 onClick={() => onNavigate('services')}
@@ -151,13 +140,13 @@ export default function HomePage({ onGetTellerBud, onNavigate }: HomePageProps) 
                 <h3 className="text-xl font-semibold text-[#090D10] mb-2 tracking-tight">
                   Customer Mobile App
                 </h3>
-                <p className="text-sm text-[#30383D] leading-relaxed mb-6 font-normal">
-                  Customers can request Pickup or Delivery services, follow request progress, manage their wallet and review transaction activity.
+                <p className="text-sm sm:text-[15px] text-[#30383D] leading-relaxed mb-6 font-normal">
+                  Customers can request secure cash Pickup or Delivery, track their requests, manage their wallet and view their transaction history.
                 </p>
               </div>
               <button
                 onClick={() => onNavigate('services')}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[#008C95] hover:text-[#005F67] group-hover:translate-x-1 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#008C95] hover:text-[#005F67] group-hover:translate-x-1 transition-all cursor-pointer pt-2"
               >
                 <span>Explore Customer Experience</span>
                 <ArrowRight className="w-4 h-4" />
@@ -178,13 +167,13 @@ export default function HomePage({ onGetTellerBud, onNavigate }: HomePageProps) 
                 <h3 className="text-xl font-semibold text-[#090D10] mb-2 tracking-tight">
                   Agent Mobile App
                 </h3>
-                <p className="text-sm text-[#30383D] leading-relaxed mb-6 font-normal">
-                  Agents can manage availability, receive eligible service requests, support Customers and confirm transaction completion.
+                <p className="text-sm sm:text-[15px] text-[#30383D] leading-relaxed mb-6 font-normal">
+                  Agents can manage daily mobile-money transactions, serve walk-in Customers, manage liquidity and fulfil Pickup and Delivery requests and with every transaction recorded instantly for real-time business visibility.
                 </p>
               </div>
               <button
                 onClick={() => onNavigate('for-business-owners')}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[#008C95] hover:text-[#005F67] group-hover:translate-x-1 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#008C95] hover:text-[#005F67] group-hover:translate-x-1 transition-all cursor-pointer pt-2"
               >
                 <span>Explore Agent Experience</span>
                 <ArrowRight className="w-4 h-4" />
@@ -205,13 +194,13 @@ export default function HomePage({ onGetTellerBud, onNavigate }: HomePageProps) 
                 <h3 className="text-xl font-semibold text-[#090D10] mb-2 tracking-tight">
                   Management Web App
                 </h3>
-                <p className="text-sm text-[#30383D] leading-relaxed mb-6 font-normal">
-                  Authorised teams can oversee platform operations, Agent activity, transactions, configurations and operational reporting.
+                <p className="text-sm sm:text-[15px] text-[#30383D] leading-relaxed mb-6 font-normal">
+                  Business Owners and authorised Admins get real-time visibility across their operations, including Agent activity, walk-in transactions, Pickup and Delivery requests, liquidity, transactions, configurations and operational reports.
                 </p>
               </div>
               <button
                 onClick={() => onNavigate('about')}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[#008C95] hover:text-[#005F67] group-hover:translate-x-1 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#008C95] hover:text-[#005F67] group-hover:translate-x-1 transition-all cursor-pointer pt-2"
               >
                 <span>Explore Management Experience</span>
                 <ArrowRight className="w-4 h-4" />
@@ -223,177 +212,13 @@ export default function HomePage({ onGetTellerBud, onNavigate }: HomePageProps) 
       </section>
 
       {/* ================================================== */}
-      {/* 3. CORE SERVICES (3 Alternating Sections)          */}
+      {/* 3. WHY TELLERBUD (Light Oceanic Green Section)      */}
       {/* ================================================== */}
-      <section className="w-full py-12 sm:py-20 border-b border-[#D9E4E4]">
+      <section className="w-full bg-[#E5F5F5] pt-8 sm:pt-10 lg:pt-[52px] pb-16 sm:pb-20 lg:pb-24 border-b border-[#D9E4E4]">
         <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20">
           
-          {/* Section Heading Header */}
-          <div className="max-w-3xl mb-10 sm:mb-12 text-left">
-            <span className="text-xs font-semibold tracking-wider text-[#008C95] uppercase block mb-3">
-              OUR SERVICE SOLUTIONS
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-semibold text-[#090D10] tracking-tight leading-tight">
-              Designed for convenient, reliable mobile money access.
-            </h2>
-          </div>
-
-          <div className="space-y-12 sm:space-y-16 lg:space-y-20">
-            
-            {/* SECTION 1 — PICKUP (Image Right) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-              <div className="lg:col-span-6 space-y-5 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E5F5F5] text-[#005F67] text-xs font-semibold">
-                  <MapPin className="w-3.5 h-3.5 text-[#008C95]" />
-                  <span>CONVENIENT PICKUP</span>
-                </div>
-                <h3 className="text-3xl sm:text-4xl font-semibold text-[#090D10] tracking-tight">
-                  Pickup Requests
-                </h3>
-                <p className="text-base sm:text-[17px] leading-[1.6] text-[#30383D] font-normal">
-                  Customers can request mobile money service and visit the confirmed Agent’s location after acceptance.
-                </p>
-                <div className="pt-2">
-                  <button
-                    onClick={() => onNavigate('services')}
-                    className="px-7 py-3.5 bg-[#008C95] hover:bg-[#005F67] text-[#FCFCFB] text-sm font-semibold rounded-full transition-all shadow-sm flex items-center gap-2 cursor-pointer"
-                  >
-                    <span>Learn About Pickup</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="lg:col-span-6">
-                <div className="relative rounded-2xl overflow-hidden border border-[#D9E4E4] bg-[#E5F5F5] shadow-lg h-[340px] sm:h-[400px] lg:h-[420px]">
-                  {!pickupError ? (
-                    <img
-                      src={PICKUP_IMG}
-                      onError={() => setPickupError(true)}
-                      referrerPolicy="no-referrer"
-                      alt="Pickup Requests at confirmed agent store"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  ) : (
-                    <img
-                      src={FALLBACK_PICKUP}
-                      referrerPolicy="no-referrer"
-                      alt="Pickup Requests at confirmed agent store"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090D10]/30 to-transparent pointer-events-none" />
-                </div>
-              </div>
-            </div>
-
-            {/* SECTION 2 — DELIVERY (Image Left) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-              <div className="lg:col-span-6 lg:order-2 space-y-5 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E5F5F5] text-[#005F67] text-xs font-semibold">
-                  <Truck className="w-3.5 h-3.5 text-[#008C95]" />
-                  <span>DIRECT DELIVERY</span>
-                </div>
-                <h3 className="text-3xl sm:text-4xl font-semibold text-[#090D10] tracking-tight">
-                  Delivery Requests
-                </h3>
-                <p className="text-base sm:text-[17px] leading-[1.6] text-[#30383D] font-normal">
-                  Customers can request a confirmed Agent to come to their selected service location.
-                </p>
-                <div className="pt-2">
-                  <button
-                    onClick={() => onNavigate('services')}
-                    className="px-7 py-3.5 bg-[#008C95] hover:bg-[#005F67] text-[#FCFCFB] text-sm font-semibold rounded-full transition-all shadow-sm flex items-center gap-2 cursor-pointer"
-                  >
-                    <span>Learn About Delivery</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="lg:col-span-6 lg:order-1">
-                <div className="relative rounded-2xl overflow-hidden border border-[#D9E4E4] bg-[#E5F5F5] shadow-lg h-[340px] sm:h-[400px] lg:h-[420px]">
-                  {!deliveryError ? (
-                    <img
-                      src={DELIVERY_IMG}
-                      onError={() => setDeliveryError(true)}
-                      referrerPolicy="no-referrer"
-                      alt="Agent delivery to customer location"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  ) : (
-                    <img
-                      src={FALLBACK_DELIVERY}
-                      referrerPolicy="no-referrer"
-                      alt="Agent delivery to customer location"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090D10]/30 to-transparent pointer-events-none" />
-                </div>
-              </div>
-            </div>
-
-            {/* SECTION 3 — BUSINESS OWNERS (Image Right) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-              <div className="lg:col-span-6 space-y-5 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E5F5F5] text-[#005F67] text-xs font-semibold">
-                  <Building2 className="w-3.5 h-3.5 text-[#008C95]" />
-                  <span>COMMUNITY COMMERCE</span>
-                </div>
-                <h3 className="text-3xl sm:text-4xl font-semibold text-[#090D10] tracking-tight">
-                  Opportunities for Business Owners
-                </h3>
-                <p className="text-base sm:text-[17px] leading-[1.6] text-[#30383D] font-normal">
-                  TellerBud supports business participation, service coordination and greater access to nearby Customers.
-                </p>
-                <div className="pt-2">
-                  <button
-                    onClick={() => onNavigate('for-business-owners')}
-                    className="px-7 py-3.5 bg-[#008C95] hover:bg-[#005F67] text-[#FCFCFB] text-sm font-semibold rounded-full transition-all shadow-sm flex items-center gap-2 cursor-pointer"
-                  >
-                    <span>Explore Business Opportunities</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="lg:col-span-6">
-                <div className="relative rounded-2xl overflow-hidden border border-[#D9E4E4] bg-[#E5F5F5] shadow-lg h-[340px] sm:h-[400px] lg:h-[420px]">
-                  {!businessError ? (
-                    <img
-                      src={BUSINESS_IMG}
-                      onError={() => setBusinessError(true)}
-                      referrerPolicy="no-referrer"
-                      alt="Opportunities for business owners and agents"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  ) : (
-                    <img
-                      src={FALLBACK_BUSINESS}
-                      referrerPolicy="no-referrer"
-                      alt="Opportunities for business owners and agents"
-                      className="w-full h-full object-cover object-center"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090D10]/30 to-transparent pointer-events-none" />
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================================================== */}
-      {/* 4. WHY TELLERBUD (Light Oceanic Green Section)      */}
-      {/* ================================================== */}
-      <section className="w-full bg-[#E5F5F5] py-20 sm:py-28 border-b border-[#D9E4E4]">
-        <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-20">
-          
-          <div className="max-w-3xl mx-auto text-center mb-16">
-            <span className="text-xs font-semibold tracking-wider text-[#008C95] uppercase block mb-3">
+          <div className="max-w-3xl mx-auto text-center mb-11">
+            <span className="text-xs font-semibold tracking-wider text-[#008C95] uppercase block mb-2.5">
               PLATFORM ADVANTAGES
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[48px] font-semibold text-[#090D10] tracking-tight">
