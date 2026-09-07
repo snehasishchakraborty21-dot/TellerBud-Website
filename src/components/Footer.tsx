@@ -1,7 +1,7 @@
-import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageCircle, Facebook, Instagram, Twitter } from 'lucide-react';
 import TellerBudLogo from './TellerBudLogo';
 import { PageId } from '../types';
-import { SITE_CONFIG } from '../config/site';
+import { SITE_CONFIG, FACEBOOK_URL, INSTAGRAM_URL, TWITTER_URL } from '../config/site';
 
 interface FooterProps {
   activePage: PageId;
@@ -205,6 +205,50 @@ export default function Footer({ onNavigate }: FooterProps) {
                 <span className="whitespace-nowrap">Lusaka, Zambia</span>
               </li>
             </ul>
+
+            {/* Follow TellerBud — Social Media Icons */}
+            <div className="pt-4 mt-2 border-t border-[#DDE7E7] space-y-2.5">
+              <h5 className="text-[12px] sm:text-[13px] font-semibold tracking-wider text-[#008C95] uppercase">
+                Follow TellerBud
+              </h5>
+              <div className="flex items-center gap-3">
+                {[
+                  { name: 'Facebook', url: FACEBOOK_URL, icon: Facebook },
+                  { name: 'Instagram', url: INSTAGRAM_URL, icon: Instagram },
+                  { name: 'X / Twitter', url: TWITTER_URL, icon: Twitter },
+                ].map((item) => {
+                  const hasUrl = Boolean(item.url && item.url.trim().length > 0);
+                  const Icon = item.icon;
+                  const buttonClasses =
+                    'w-10 h-10 rounded-full border border-[#DDE7E7] bg-[#FCFCFB] text-[#008C95] hover:bg-[#008C95] hover:text-[#FCFCFB] hover:border-[#008C95] transition-all duration-200 inline-flex items-center justify-center shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-[#008C95]';
+
+                  return hasUrl ? (
+                    <a
+                      key={item.name}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Follow TellerBud on ${item.name}`}
+                      title={`Follow TellerBud on ${item.name}`}
+                      className={buttonClasses}
+                    >
+                      <Icon className="w-[18px] h-[18px]" />
+                    </a>
+                  ) : (
+                    <button
+                      key={item.name}
+                      type="button"
+                      onClick={(e) => e.preventDefault()}
+                      aria-label={`Follow TellerBud on ${item.name} (Official profile coming soon)`}
+                      title={`Follow TellerBud on ${item.name} (Official profile coming soon)`}
+                      className={`${buttonClasses} cursor-default`}
+                    >
+                      <Icon className="w-[18px] h-[18px]" />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
         </div>

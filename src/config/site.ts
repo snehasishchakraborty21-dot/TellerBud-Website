@@ -19,6 +19,11 @@ export const IOS_APP_STORE_URL = '';
 // Configurable Login URL (empty until official login portal / web app is configured)
 export const LOGIN_URL: string = '';
 
+// Shared configurable social media URLs (empty until official profiles are supplied)
+export const FACEBOOK_URL: string = '';
+export const INSTAGRAM_URL: string = '';
+export const TWITTER_URL: string = '';
+
 // Shared official TellerBud logo asset path
 export const TELLERBUD_LOGO_URL = '/assets/TellerBud%20App%20Logo%20-%20Mix.png';
 
@@ -71,5 +76,10 @@ export const SITE_CONFIG = {
     phone: '+1 616 334 9100',
     phoneRaw: '+16163349100',
     whatsappUrl: 'https://wa.me/16163349100',
+  },
+  social: {
+    facebook: FACEBOOK_URL,
+    instagram: INSTAGRAM_URL,
+    twitter: TWITTER_URL,
   },
 };
