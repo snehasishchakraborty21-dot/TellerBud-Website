@@ -19,10 +19,10 @@ export const IOS_APP_STORE_URL = '';
 // Configurable Login URL (empty until official login portal / web app is configured)
 export const LOGIN_URL: string = '';
 
-// Shared configurable social media URLs (empty until official profiles are supplied)
-export const FACEBOOK_URL: string = '';
-export const INSTAGRAM_URL: string = '';
-export const TWITTER_URL: string = '';
+// Shared official TellerBud social media URLs
+export const FACEBOOK_URL: string = 'https://web.facebook.com/profile.php?id=61594714333267';
+export const INSTAGRAM_URL: string = 'https://www.instagram.com/tellerbud_sysadmin/';
+export const TWITTER_URL: string = 'https://x.com/TellerBud_ZM';
 
 // Shared official TellerBud logo asset path
 export const TELLERBUD_LOGO_URL = '/assets/TellerBud%20App%20Logo%20-%20Mix.png';
